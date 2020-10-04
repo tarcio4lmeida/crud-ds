@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.apicrudds.backend.resources.exceptions.StandardError;
+import com.apicrudds.backend.services.exceptions.DataBaseException;
 import com.apicrudds.backend.services.exceptions.ResourceNotFoundException;
 
 @ControllerAdvice
@@ -28,4 +29,18 @@ public class ResourceExceptionHandler {
 		
 		return ResponseEntity.status(status).body(err);
 	}
+	
+	public ResponseEntity<StandardError> dataBase(DataBaseException e, HttpServletRequest request){
+		HttpStatus status = HttpStatus.BAD_REQUEST;
+		StandardError err = new StandardError();
+		
+		err.setTimestamp(Instant.now());
+		err.setStatus(status.value());
+		err.setError("DataBase exception");
+		err.setMessage(e.getMessage());
+		err.setPath(request.getRequestURI());
+		
+		return ResponseEntity.status(status).body(err);
+	}
+	
 }
