@@ -3,6 +3,7 @@ package com.apicrudds.backend.entities;
 import java.io.Serializable;
 import java.time.Instant;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,18 +21,20 @@ public class Client implements Serializable{
 	private String name;
 	private String cpf;
 	private Double income;
-	private Instant birthdate;
+	
+	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+	private Instant birthDate;
 	private Integer children;
 	
 	public Client() {	
 	}
 
-	public Client(Long id, String name, String cpf, Double income, Instant birthdate, Integer children) {
+	public Client(Long id, String name, String cpf, Double income, Instant birthDate, Integer children) {
 		this.id = id;
 		this.name = name;
 		this.cpf = cpf;
 		this.income = income;
-		this.birthdate = birthdate;
+		this.birthDate = birthDate;
 		this.children = children;
 	}
 
@@ -66,15 +69,15 @@ public class Client implements Serializable{
 	public void setIncome(Double income) {
 		this.income = income;
 	}
-	
-	public Instant getBirthdate() {
-		return birthdate;
+
+	public Instant getBirthDate() {
+		return birthDate;
 	}
-	
-	public void setBirthdate(Instant birthdate) {
-		this.birthdate = birthdate;
+
+	public void setBirthDate(Instant birthDate) {
+		this.birthDate = birthDate;
 	}
-	
+
 	public Integer getChildren() {
 		return children;
 	}
